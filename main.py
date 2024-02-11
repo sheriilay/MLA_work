@@ -16,8 +16,8 @@ std = [0.1818, 0.2227, 0.2390]
 trainset_path = 'dataset/train'
 testset_path = 'dataset/test'
 
-trainset_transforms =  transforms.Compose([transforms.Resize((224,224)), transforms.RandomHorizontalFlip(), transforms.RandomRotation(10), transforms.ToTensor(), transforms.Normalize(torch.Tensor(mean), torch.Tensor(std))])
-testset_transforms = transforms.Compose([transforms.Resize((224,224)),transforms.ToTensor(), transforms.Normalize(torch.Tensor(mean), torch.Tensor(std))])
+trainset_transforms =  transforms.Compose([transforms.Resize((200,200)), transforms.RandomHorizontalFlip(), transforms.RandomRotation(10), transforms.ToTensor(), transforms.Normalize(torch.Tensor(mean), torch.Tensor(std))])
+testset_transforms = transforms.Compose([transforms.Resize((200,200)),transforms.ToTensor(), transforms.Normalize(torch.Tensor(mean), torch.Tensor(std))])
 
 trainset = torchvision.datasets.ImageFolder(root=trainset_path, transform=trainset_transforms)
 testset = torchvision.datasets.ImageFolder(root = testset_path, transform=testset_transforms)
@@ -112,7 +112,7 @@ loss_fn = nn.CrossEntropyLoss()
 
 optimizer = opt.SGD(resnet18_model.parameters(), lr=0.01, momentum=0.9, weight_decay=0.003)
 
-#train_nn(resnet18_model, train_loader, test_loader, loss_fn, optimizer, 5)
+train_nn(resnet18_model, train_loader, test_loader, loss_fn, optimizer, 5)
 
 checkpoint = torch.load('model_best_checkpoint.pth.tar')
 
